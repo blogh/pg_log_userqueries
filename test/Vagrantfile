@@ -1,0 +1,52 @@
+require 'ipaddr'
+
+ENV["LC_ALL"] = 'en_US.utf8'
+
+
+### libvirt
+myProvider = 'libvirt'
+myBox      = 'centos/7'
+start_ip   = '10.20.99.50'
+pg_servers = [ 'pgluq' ]
+
+
+### pg configuration
+pgver         = 11
+
+Vagrant.configure(2) do |config|
+    config.vm.provider myProvider
+
+    nodes_ips  = {}
+    next_ip    = IPAddr.new(start_ip)
+
+    ( pg_servers ).each do |node|
+        nodes_ips[node] = next_ip.to_s
+        next_ip = next_ip.succ
+    end
+
+    ### don't mind about insecure ssh key
+    config.ssh.insert_key = false
+
+    ### https://vagrantcloud.com/search.
+    config.vm.box = myBox
+
+    ### hardware and host settings
+    config.vm.provider myProvider do |lv|
+        lv.cpus = 1
+        lv.memory = 512
+        lv.watchdog model: 'i6300esb'
+        lv.default_prefix = 'vm'
+        lv.qemu_use_session = false
+    end
+
+    ### disable default share
+    config.vm.synced_folder ".", "/vagrant", disabled: false
+
+    ### setup postgresql nodes
+    ( pg_servers ).each do |node|
+        config.vm.define node do |pg_setup|
+            pg_setup.vm.network 'private_network', ip: nodes_ips[node]
+            pg_setup.vm.hostname = node
+        end
+    end
+end
