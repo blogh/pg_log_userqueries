@@ -19,4 +19,3 @@ SELECT 'db4 u4';
 SELECT 'postgres pasmoi';
 BEGIN;
 COMMIT;
-EOF

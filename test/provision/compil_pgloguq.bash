@@ -87,7 +87,7 @@ version_list[5]="9.6.19"
 version_list[6]="10.14"
 version_list[7]="11.9"
 version_list[8]="12.4"
-version_list[9]="13beta3"
+version_list[9]="13.0"
 
 bin_dir="/usr/local/postgres"
 source_dir="/$USER/source"
