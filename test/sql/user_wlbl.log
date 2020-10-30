@@ -1,0 +1,3 @@
+psql:./sql/user_wlbl.sql:14: INFO:  LOG_UQ statement: SELECT 'db2 u2';
+psql:./sql/user_wlbl.sql:17: INFO:  LOG_UQ statement: SELECT 'db3 u3';
+psql:./sql/user_wlbl.sql:20: INFO:  LOG_UQ statement: SELECT 'db4 u4';

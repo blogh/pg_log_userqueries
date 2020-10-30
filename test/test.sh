@@ -7,7 +7,7 @@ log() {
 }
 
 warn() {
-	echo "$(date) LOG $*"
+	echo "$(date) WARN $*"
 }
 
 die() {
@@ -25,7 +25,6 @@ bootstrap_instance (){
 
 	log "initdb -D $PGDATA"
 	"$PGBIN"/initdb -D "$PGDATA" --username postgres &>/dev/null
-	#"$PGBIN"/initdb -D "$PGDATA" --username postgres
 
 	VERSION=$(cat "$PGDATA/PG_VERSION")
 	if [[ "$VERSION" == "9.1" ]] || [[ "$VERSION" == "9.0" ]]; then
@@ -52,7 +51,6 @@ EOF
 
 	log "pgstart $PGDATA"
 	"$PGBIN"/pg_ctl start -D "$PGDATA" -w &>/dev/null
-	#"$PGBIN"/pg_ctl start -D "$PGDATA" -w
 }
 
 scratch_instance (){
@@ -65,7 +63,6 @@ scratch_instance (){
 
 	log "pgstop $PGDATA"
 	"$PGBIN"/pg_ctl stop -D "$PGDATA" -w -m fast &>/dev/null
-	#"$PGBIN"/pg_ctl stop -D "$PGDATA" -w -m fast
 	log "removing $PGDATA"
 	rm -Rf "$PGDATA"
 }
@@ -79,16 +76,27 @@ run_test (){
 	local PGBIN=$1
 	local TESTFILE=$2
 
-#	local VERSION=""
+	local VERSION=$(cat "$PGDATA/PG_VERSION")
+	local MODEL=""
 	log "test"
 
-	$PGBIN/psql -Xe -p $PORT -U postgres -d postgres -f ./sql/${TESTFILE}.sql
+	if [[ -f ./sql/${TESTFILE}_${VERSION}.log ]]; then
+		MODEL="./sql/${TESTFILE}_${VERSION}.log"
+	else
+		if [[ -f ./sql/${TESTFILE}.log ]]; then
+			MODEL="./sql/${TESTFILE}.log"
+		fi
+	fi
 
-#	VERSION=$($PGBIN/psql -p $PORT -U postgres -d postgres -XtA -c "SELECT substring(lpad(current_setting('server_version_num'),6,'0'), 1, 4)")
-#	$PGBIN/psql -Xe -p $PORT -U postgres -d postgres -f ./sql/${TESTFILE}.sql 2>./test.log
-
-#	diff ./sql/${TESTFILE}_${VERSION}.log ./test.log 2>/dev/null
-#	[[ "$?" -ne "0" ]] && warn "Test $TESTFILE for version $VERSION failed"
+	if [[ -n "$MODEL" ]]; then
+		$PGBIN/psql -Xe -p $PORT -U postgres -d postgres -f ./sql/${TESTFILE}.sql 2>test.log 1>/dev/null
+		diff $MODEL ./test.log 2>/dev/null
+		if [[ "$?" -ne "0" ]]; then
+			warn "Test $TESTFILE for version $VERSION failed"
+		fi
+	else
+		$PGBIN/psql -Xe -p $PORT -U postgres -d postgres -f ./sql/${TESTFILE}.sql 2>&1 | tee test.log
+	fi
 }
 
 instance_test() {
@@ -113,7 +121,7 @@ EOF
 }
 
 main() {
-	set -o errexit
+#	set -o errexit
 	set -o nounset
 	set -o pipefail
 

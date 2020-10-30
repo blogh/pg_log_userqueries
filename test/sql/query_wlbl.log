@@ -1,0 +1,13 @@
+psql:./sql/query_wlbl.sql:2: INFO:  LOG_UQ statement: CREATE USER u1;
+psql:./sql/query_wlbl.sql:4: INFO:  LOG_UQ statement: CREATE USER u2;
+psql:./sql/query_wlbl.sql:6: INFO:  LOG_UQ statement: CREATE USER u3;
+psql:./sql/query_wlbl.sql:8: INFO:  LOG_UQ statement: CREATE USER u4;
+psql:./sql/query_wlbl.sql:10: INFO:  LOG_UQ statement: CREATE USER pasmoi;
+psql:./sql/query_wlbl.sql:12: INFO:  LOG_UQ statement: CREATE DATABASE db1;
+psql:./sql/query_wlbl.sql:14: INFO:  LOG_UQ statement: CREATE DATABASE db2;
+psql:./sql/query_wlbl.sql:16: INFO:  LOG_UQ statement: CREATE DATABASE db3;
+psql:./sql/query_wlbl.sql:18: INFO:  LOG_UQ statement: CREATE DATABASE db4;
+psql:./sql/query_wlbl.sql:23: INFO:  LOG_UQ statement: SELECT 'db2 u2';
+psql:./sql/query_wlbl.sql:26: INFO:  LOG_UQ statement: SELECT 'db3 u3';
+psql:./sql/query_wlbl.sql:29: INFO:  LOG_UQ statement: SELECT 'db4 u4';
+psql:./sql/query_wlbl.sql:32: INFO:  LOG_UQ statement: SELECT 'postgres pasmoi';

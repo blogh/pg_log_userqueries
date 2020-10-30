@@ -1,0 +1,4 @@
+psql:./sql/noconf.sql:2: INFO:  LOG_UQ statement: CREATE USER normal WITH LOGIN;
+psql:./sql/noconf.sql:4: INFO:  LOG_UQ statement: CREATE USER su WITH LOGIN SUPERUSER;
+psql:./sql/noconf.sql:6: INFO:  LOG_UQ statement: SELECT 1;
+psql:./sql/noconf.sql:12: INFO:  LOG_UQ statement: SELECT 3;
