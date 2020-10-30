@@ -1,0 +1,8 @@
+psql:./sql/app_wlbl.sql:5: INFO:  LOG_UQ statement: SET application_name TO 'goodApp1';
+psql:./sql/app_wlbl.sql:7: INFO:  LOG_UQ statement: SELECT 'goodApp1';
+psql:./sql/app_wlbl.sql:8: INFO:  LOG_UQ statement: SET application_name TO 'goodApp2';
+psql:./sql/app_wlbl.sql:10: INFO:  LOG_UQ statement: SELECT 'goodApp2';
+psql:./sql/app_wlbl.sql:11: INFO:  LOG_UQ statement: SET application_name TO 'goodApp';
+psql:./sql/app_wlbl.sql:13: INFO:  LOG_UQ statement: SELECT 'goodApp';
+psql:./sql/app_wlbl.sql:14: INFO:  LOG_UQ statement: SET application_name TO 'ThatsagoodApp';
+psql:./sql/app_wlbl.sql:16: INFO:  LOG_UQ statement: SELECT 'ThatsagoodApp';
