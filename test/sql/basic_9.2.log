@@ -15,8 +15,8 @@ psql:./sql/basic.sql:28: INFO:  LOG_UQ statement: EXPLAIN ANALYZE SELECT 1;
 psql:./sql/basic.sql:28: INFO:  LOG_UQ statement: EXPLAIN ANALYZE SELECT 1;
 psql:./sql/basic.sql:30: INFO:  LOG_UQ statement: EXPLAIN ANALYZE SELECT avg(i) FROM test_table;
 psql:./sql/basic.sql:30: INFO:  LOG_UQ statement: EXPLAIN ANALYZE SELECT avg(i) FROM test_table;
-psql:./sql/basic.sql:32: INFO:  LOG_UQ statement: ALTER TABLE test_table ADD CONSTRAINT pk_test_table PRIMARY KEY (i);
 psql:./sql/basic.sql:32: NOTICE:  ALTER TABLE / ADD PRIMARY KEY will create implicit index "pk_test_table" for table "test_table"
+psql:./sql/basic.sql:32: INFO:  LOG_UQ statement: ALTER TABLE test_table ADD CONSTRAINT pk_test_table PRIMARY KEY (i);
 psql:./sql/basic.sql:34: INFO:  LOG_UQ statement: DROP TABLE test_table;
 psql:./sql/basic.sql:42: INFO:  LOG_UQ statement: SELECT 1;
 psql:./sql/basic.sql:46: INFO:  LOG_UQ statement: DROP DATABASE test_loguq;
