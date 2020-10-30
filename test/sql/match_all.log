@@ -1,0 +1,2 @@
+psql:./sql/match_all.sql:15: INFO:  LOG_UQ statement: SELECT 'logged';
+psql:./sql/match_all.sql:19: INFO:  LOG_UQ statement: SELECT 'logged';
